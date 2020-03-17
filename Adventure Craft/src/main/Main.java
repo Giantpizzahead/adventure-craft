@@ -11,20 +11,21 @@ public class Main {
         // Intiialize the main game frame
         JFrame frame = new JFrame("Adventure Craft");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
         GameWindow gameWindow = new GameWindow(WIDTH, HEIGHT);
         frame.add(gameWindow);
         frame.pack();
-        gameWindow.createBufferStrategy(3);
         frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
         frame.setVisible(true);
-        frame.toFront();
+        gameWindow.createBufferStrategy(3);
 
         // Main game loop
         long lastTime = System.nanoTime(), currTime;
         long nsElapsedFrame = 0, nsElapsedDraw = 0;
         long nsPerFrame = 1_000_000_000 / FPS;
         long nsPerDraw = 1_000_000_000 / DRAW_FPS;
+        frame.toFront();
+        frame.requestFocus();
         while (gameWindow.isRunning()) {
             // Update tracked times
             currTime = System.nanoTime();
